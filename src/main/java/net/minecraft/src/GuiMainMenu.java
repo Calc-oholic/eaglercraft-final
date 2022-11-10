@@ -86,7 +86,7 @@ public class GuiMainMenu extends GuiScreen {
 				this.splashText = "missingno";
 			}
 		}
-		this.field_92025_p = EaglerAdapter._wisWebGL() ? ("eaglercraft javascript runtime") : ("eaglercraft desktop runtime");
+		this.field_92025_p = EaglerAdapter._wisWebGL() ? ("on a chromebook?!") : ("argylemc");
 		this.start = System.currentTimeMillis();
 		this.start += this.start % 10000l;
 		this.ackLines = new ArrayList();
@@ -211,16 +211,16 @@ public class GuiMainMenu extends GuiScreen {
 		if(!showAck) {
 			super.mouseClicked(par1, par2, par3);
 			if (par3 == 0) {
-				int w = this.fontRenderer.getStringWidth("eaglercraft readme.txt") * 3 / 4;
+				int w = this.fontRenderer.getStringWidth("ignore this") * 3 / 4;
 				if(par1 >= (this.width - w - 4) && par1 <= this.width && par2 >= 0 && par2 <= 9) {
-					showAck = true;
+					showAck = false;
 					return;
 				}
 				w = this.fontRenderer.getStringWidth("debug console") * 3 / 4;
 				if(par1 >= 0 && par1 <= (w + 4) && par2 >= 0 && par2 <= 9) {
-					/*
+					
 					EaglerAdapter.openConsole();
-					*/
+					
 				}
 				if(ConfigConstants.mainMenuItemLink != null) {
 					//drawRect((this.width - w - 4), 0, this.width, 9, 0x55200000);
@@ -280,7 +280,7 @@ public class GuiMainMenu extends GuiScreen {
 			if(EaglerAdapter.isIntegratedServerAvailable()) {
 				if(!IntegratedServer.isAlive()) {
 					IntegratedServer.begin();
-					this.mc.displayGuiScreen(new GuiScreenSingleplayerLoading(new GuiSelectWorld(this), "starting up integrated server", () -> IntegratedServer.isReady()));
+					this.mc.displayGuiScreen(new GuiScreenSingleplayerLoading(new GuiSelectWorld(this), "building you a custom world", () -> IntegratedServer.isReady()));
 				}else {
 					this.mc.displayGuiScreen(new GuiSelectWorld(this));
 				}
@@ -298,8 +298,7 @@ public class GuiMainMenu extends GuiScreen {
 		}
 
 		if (par1GuiButton.id == 3) {
-			//this.mc.displayGuiScreen(new GuiScreenVoiceChannel(this));
-			EaglerAdapter.openLink(ConfigConstants.forkMe);
+			this.mc.displayGuiScreen(new GuiScreenVoiceChannel(this));
 		}
 
 		if (par1GuiButton.id == 4) {
@@ -504,14 +503,11 @@ public class GuiMainMenu extends GuiScreen {
 		this.drawTexturedModalRect(var6 + 155, var7 + 0, 0, 45, 155, 44);
 
 		this.drawString(this.fontRenderer, "minecraft 1.5.2", 2, this.height - 20, 16777215);
-		this.drawString(this.fontRenderer, ConfigConstants.mainMenuString + EnumChatFormatting.GRAY + " (cracked)", 2, this.height - 10, 16777215);
+		this.drawString(this.fontRenderer, "ArgyleMC" + EnumChatFormatting.GRAY + " (hello)", 2, this.height - 10, 16777215);
 
 		//String var10 = "Copyright " + Calendar.getInstance().get(Calendar.YEAR) + " Mojang AB.";
 		String var10 = "copyright 2013 Mojang AB";
 		this.drawString(this.fontRenderer, var10, this.width - this.fontRenderer.getStringWidth(var10) - 2, this.height - 10, 16777215);
-
-		var10 = "site resources are";
-		this.drawString(this.fontRenderer, var10, this.width - this.fontRenderer.getStringWidth(var10) - 2, this.height - 20, 16777215);
 		
 		if(showingEndian && EaglerAdapter.isBigEndian()) {
 			this.drawCenteredString(fontRenderer, "(BIG Endian)", this.width / 2, this.height - 10, 0xFFFFBBBB);
@@ -548,20 +544,8 @@ public class GuiMainMenu extends GuiScreen {
 		EaglerAdapter.glDisable(EaglerAdapter.GL_BLEND);
 		EaglerAdapter.glPopMatrix();
 		*/
-		var10 = "eaglercraft readme.txt";
-		int w = this.fontRenderer.getStringWidth(var10) * 3 / 4;
-		if(!showAck && par1 >= (this.width - w - 4) && par1 <= this.width && par2 >= 0 && par2 <= 9) {
-			drawRect((this.width - w - 4), 0, this.width, 9, 0x55000099);
-		}else {
-			drawRect((this.width - w - 4), 0, this.width, 9, 0x55200000);
-		}
-		EaglerAdapter.glPushMatrix();
-		EaglerAdapter.glTranslatef((this.width - w - 2), 1.0f, 0.0f);
-		EaglerAdapter.glScalef(0.75f, 0.75f, 0.75f);
-		this.drawString(this.fontRenderer, var10, 0, 0, 16777215);
-		EaglerAdapter.glPopMatrix();
 		
-		/*
+		
 		var10 = "debug console";
 		w = this.fontRenderer.getStringWidth(var10) * 3 / 4;
 		if(!showAck && par1 >= 0 && par1 <= (w + 4) && par2 >= 0 && par2 <= 9) {
@@ -574,7 +558,7 @@ public class GuiMainMenu extends GuiScreen {
 		EaglerAdapter.glScalef(0.75f, 0.75f, 0.75f);
 		this.drawString(this.fontRenderer, var10, 0, 0, 16777215);
 		EaglerAdapter.glPopMatrix();
-		*/
+		
 		
 		if(ConfigConstants.mainMenuItemLink != null) {
 			//drawRect((this.width - w - 4), 0, this.width, 9, 0x55200000);
